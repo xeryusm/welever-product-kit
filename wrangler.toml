@@ -1,0 +1,21 @@
+name = "welever-install-worker"
+type = "javascript"
+account_id = "YOUR_ACCOUNT_ID"  # À obtenir depuis Cloudflare Dashboard
+workers_dev = true
+route = "install.welever.fr/*"
+zone_id = "YOUR_ZONE_ID"  # À obtenir depuis Cloudflare Dashboard
+
+[env.production]
+name = "welever-install-worker-prod"
+route = "install.welever.fr/*"
+zone_id = "YOUR_ZONE_ID"
+
+# KV Namespace pour stocker les clés d'accès
+[[kv_namespaces]]
+binding = "WELEVER_KEYS"
+id = "YOUR_KV_NAMESPACE_ID"  # À créer dans Cloudflare
+
+[build]
+cwd = "."
+command = "npm install"
+watch_paths = ["cloudflare-worker.js"]
